@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite",
+    "dev:ide": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "preview:ide": "vite preview --host --port 5173",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.html",
     "stylelint": "stylelint \"**/*.css\"",

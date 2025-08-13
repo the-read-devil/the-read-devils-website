@@ -1,0 +1,33 @@
+{
+  // Cursor/VS Code: Tasks to run dev server
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev: Vite (5173)",
+      "type": "shell",
+      "command": "npm run dev:ide",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": ".*",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*vite v.* ready.*",
+          "endsPattern": ".*Local:   http://localhost:5173/.*"
+        }
+      }
+    },
+    {
+      "label": "Preview: Vite (5173)",
+      "type": "shell",
+      "command": "npm run preview:ide"
+    }
+  ]
+}
+

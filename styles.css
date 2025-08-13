@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Rainbow';
+  src: url('./assets/fonts/Rainbow-Regular.woff2') format('woff2'),
+       url('./assets/fonts/Rainbow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('./assets/fonts/DancingScript-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 /* Non-critical styles. Critical hero/nav styles are inlined in index.html */
 
 /* Typography helpers */
@@ -30,4 +45,69 @@ summary::marker { content: ''; }
 @media (min-width: 768px) {
   footer .container { display: flex; align-items: center; justify-content: space-between; }
 }
+
+/* Responsive and layout enhancements */
+*, *::before, *::after { box-sizing: border-box; }
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* Make nav adapt gracefully on small screens */
+@media (max-width: 768px) {
+  header nav { gap: var(--space-3); flex-wrap: wrap; }
+  header nav .spacer { display: none; }
+  header nav a { white-space: nowrap; }
+  header nav .btn { padding: 10px 14px; font-size: 14px; }
+
+  .title-wrap { padding: var(--space-7) var(--space-5); }
+  section { padding: var(--space-6) 0; }
+}
+
+@media (max-width: 480px) {
+  header nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  header nav a { flex: 0 0 auto; }
+
+  /* Avoid potential 100vw overflow on ultra-small screens */
+  .title-wrap { width: 100%; margin-left: 0; margin-right: 0; border-radius: 0; }
+  .subhead { margin-top: var(--space-3); margin-bottom: var(--space-5); }
+}
+
+/* Guard grid against overflow on tight widths */
+.activity-grid { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+
+/* Hamburger and responsive nav */
+.nav-toggle { display: none; appearance: none; background: transparent; border: 0; padding: 10px; margin: -6px 0; cursor: pointer; border-radius: 6px; }
+.nav-toggle:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(209,59,59,0.35); }
+.nav-toggle .bar { display: none; }
+.nav-toggle .icon-burger { display: block; color: #fff; }
+
+/* Default desktop menu layout */
+nav .menu-items { display: flex; align-items: center; gap: var(--space-5); }
+
+@media (max-width: 1200px) {
+  header nav { position: relative; display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 0; padding: var(--space-3) 0; overflow: visible; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; z-index: 30; grid-column: 1; justify-self: start; }
+  header nav .brand { grid-column: 2; justify-self: center; }
+  header nav .spacer { display: none; }
+
+  /* Dropdown menu with animation */
+  nav .menu-items { display: block; position: absolute; top: calc(100% - 2px); left: 0; right: 0; background: rgba(14,14,14,0.98); border-bottom: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 24px rgba(0,0,0,0.35); padding: 6px 0; z-index: 20;
+    visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; max-height: 0; overflow: hidden;
+    transition: opacity 180ms ease, transform 220ms ease, max-height 260ms ease, visibility 0s linear 220ms; }
+  nav .menu-items a { display: block; padding: 12px 16px; text-decoration: none; }
+  nav .menu-items a + a { border-top: 1px solid rgba(255,255,255,0.06); }
+  nav .menu-items .btn { display: block; width: auto; text-align: center; margin: 8px 12px 2px; }
+
+  .nav-toggle[aria-expanded="true"] ~ .menu-items { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 80vh; transition-delay: 0s; }
+
+  /* Animate icon to X when open */
+  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* If JS is disabled (html.no-js remains), keep menu visible */
+  .no-js nav .menu-items { display: block; position: static; box-shadow: none; border: 0; padding: 0; visibility: visible; opacity: 1; transform: none; pointer-events: auto; max-height: none; }
+}
+
+/* Prevent background scroll when mobile menu is open */
+body.menu-open { overflow: hidden; }
 
