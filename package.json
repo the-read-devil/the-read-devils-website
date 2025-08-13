@@ -1,0 +1,28 @@
+{
+  "name": "read-devils",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .js,.html",
+    "stylelint": "stylelint \"**/*.css\"",
+    "a11y": "axe http://localhost:5173 --chrome-options='--headless=new'",
+    "lh": "lighthouse http://localhost:5173 --only-categories=performance,accessibility,seo,best-practices --chrome-flags='--headless=new'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@axe-core/cli": "^4.10.2",
+    "eslint": "^9.33.0",
+    "lighthouse": "^12.8.1",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.23.1",
+    "stylelint-config-standard": "^39.0.0",
+    "vite": "^7.1.2"
+  }
+}

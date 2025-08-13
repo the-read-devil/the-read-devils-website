@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Read Devils Reading Club — Invite-Only Readers’ Circle</title>
+    <meta name="description" content="Invite-only reading club in India for people who love books, films, music, and art. Build a reading habit with real conversations and city meetups." />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#0E0E0E" />
+    <link rel="canonical" href="https://ajay.example.com/read-devils/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="The Read Devils Reading Club — Invite-Only Readers’ Circle" />
+    <meta property="og:description" content="Invite-only reading club in India for people who love books, films, music, and art." />
+    <meta property="og:image" content="./assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://ajay.example.com/read-devils/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Read Devils Reading Club — Invite-Only Readers’ Circle" />
+    <meta name="twitter:description" content="Invite-only reading club in India for people who love books, films, music, and art." />
+    <meta name="twitter:image" content="./assets/og-image.png" />
+
+    <style>
+      :root {
+        --color-bg: #0e0e0e;
+        --color-text: #ffffff;
+        --color-accent: #d13b3b;
+        --color-accent-hover: #b73333;
+        --maxw: 1120px;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 24px;
+        --space-6: 32px;
+        --space-7: 48px;
+        --space-8: 64px;
+        --radius: 8px;
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+      }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.6;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-5); }
+      a { color: var(--color-text); }
+      .btn {
+        display: inline-block;
+        background: var(--color-accent);
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        border: 2px solid transparent;
+      }
+      .btn:hover, .btn:focus-visible { background: var(--color-accent-hover); }
+      .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(209,59,59,0.35); }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: saturate(1.2) blur(6px);
+        background: rgba(14,14,14,0.75);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        z-index: 10;
+      }
+      nav { display: flex; align-items: center; gap: var(--space-5); padding: var(--space-4) 0; }
+      nav .spacer { flex: 1; }
+      nav a { text-decoration: none; opacity: 0.95; }
+      nav a:hover, nav a:focus-visible { text-decoration: underline; }
+
+      .hero { padding: var(--space-8) 0 var(--space-7); text-align: center; }
+      .logo { width: 120px; height: auto; margin: 0 auto var(--space-5); display: block; }
+      h1 { font-size: clamp(28px, 6vw, 56px); line-height: 1.1; margin: 0 0 var(--space-4); }
+      .subhead { font-size: clamp(16px, 2.6vw, 22px); opacity: 0.9; margin-bottom: var(--space-6); }
+
+      section { padding: var(--space-7) 0; border-top: 1px solid rgba(255,255,255,0.08); }
+      section:first-of-type { border-top: none; }
+      h2 { font-size: clamp(22px, 3.5vw, 32px); margin: 0 0 var(--space-4); }
+      ul { padding-left: 20px; }
+      .grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+      details { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: var(--space-4); }
+      details + details { margin-top: var(--space-4); }
+      summary { cursor: pointer; font-weight: 600; }
+
+      .cta-fab { position: fixed; right: 20px; bottom: 20px; z-index: 20; }
+      .cta-fab .btn { box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+      footer { padding: var(--space-7) 0; border-top: 1px solid rgba(255,255,255,0.08); opacity: 0.9; }
+
+      .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+      .skip-link:focus { position: static; width: auto; height: auto; padding: var(--space-3); background: #fff; color: #000; border-radius: var(--radius); }
+    </style>
+    <link rel="stylesheet" href="./styles.css" />
+    <script>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container">
+        <nav aria-label="Primary">
+          <a href="#top" aria-label="Home">
+            <img src="./assets/logo.svg" alt="Read Devils logo" class="logo" width="120" height="120" />
+          </a>
+          <div class="spacer"></div>
+          <a href="#why">Why Join</a>
+          <a href="#activities">What You’ll Do</a>
+          <a href="#how">How It Works</a>
+          <a href="#faqs">FAQs</a>
+          <a href="#invite" class="btn">Request Invite</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="container">
+          <img src="./assets/logo.svg" alt="Read Devils logo" class="logo" width="120" height="120" />
+          <h1>The Read Devils Reading Club</h1>
+          <p class="subhead">Turn pages into experiences. Join a circle that actually reads.</p>
+          <p>
+            <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+          </p>
+        </div>
+      </section>
+
+      <section id="why">
+        <div class="container">
+          <h2>Why Join</h2>
+          <ul>
+            <li>Build a reading habit with gentle accountability.</li>
+            <li>Share “mind-blowing moments” from books, films, music, and art.</li>
+            <li>Real conversations, zero-judgement.</li>
+            <li>Small cohorts and real-world meetups when possible.</li>
+            <li>Curated prompts and theme months to keep you inspired.</li>
+            <li>Fun over pressure; progress over perfection.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="activities">
+        <div class="container">
+          <h2>What You’ll Do</h2>
+          <ul class="grid">
+            <li>20-page/day commitment sprints.</li>
+            <li>“Mind-blowing moments” threads to swap insights.</li>
+            <li>Theme months (poetry, short stories, world cinema, etc.).</li>
+            <li>Lunches/outings, occasional book swaps, museum/film nights.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="how">
+        <div class="container">
+          <h2>How It Works</h2>
+          <ol>
+            <li>Request an invite (limited seats; we keep cohorts small).</li>
+            <li>Pick a reading pledge—pages per day or week.</li>
+            <li>Show up for check-ins; share one insight that moved you.</li>
+            <li>Join city meetups when you can.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="faqs">
+        <div class="container">
+          <h2>FAQs</h2>
+          <details>
+            <summary>Who can join?</summary>
+            <p>Anyone curious about reading and conversations.</p>
+          </details>
+          <details>
+            <summary>Is there a fee?</summary>
+            <p>Currently free; some events may be pay-your-own-way.</p>
+          </details>
+          <details>
+            <summary>Online or in person?</summary>
+            <p>Both—online discussions plus optional city meetups.</p>
+          </details>
+          <details>
+            <summary>Why invite-only?</summary>
+            <p>To keep groups focused, respectful, and consistent.</p>
+          </details>
+          <details>
+            <summary>Do I need to be a heavy reader?</summary>
+            <p>No—beginners welcome.</p>
+          </details>
+          <details>
+            <summary>Where are you based?</summary>
+            <p>Mostly India; online is open.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="invite">
+        <div class="container">
+          <h2>Request Invite</h2>
+          <p>We review invite requests periodically. If selected, you’ll hear back within 1–2 weeks.</p>
+          <p>
+            <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; <span id="year"></span> Read Devils. All rights reserved.</p>
+        <p><a class="btn" href="#invite">Request Invite</a></p>
+      </div>
+    </footer>
+
+    <div class="cta-fab" aria-hidden="true">
+      <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+  </html>
+
