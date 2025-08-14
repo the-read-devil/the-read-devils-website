@@ -4,25 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The Read Devils Reading Club — Invite-Only Readers’ Circle</title>
-    <meta name="description" content="Invite-only reading club in India for people who love books, films, music, and art. Build a reading habit with real conversations and city meetups." />
+    <meta name="description" content="Bengaluru-based invite-only reading club for people who love books, films, music, and art. Most meetups happen in Bengaluru; online cohorts welcome." />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="./assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
     <link rel="manifest" href="./assets/manifest-L3skuw-_.webmanifest" />
     <meta name="theme-color" content="#0E0E0E" />
-    <link rel="canonical" href="https://ajay.example.com/read-devils/" />
+    <link rel="canonical" href="https://www.thereaddevils.com/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="The Read Devils Reading Club — Invite-Only Readers’ Circle" />
-    <meta property="og:description" content="Invite-only reading club in India for people who love books, films, music, and art." />
-    <meta property="og:image" content="./assets/og-image.png" />
+    <meta property="og:description" content="Bengaluru-based invite-only reading club. Most meetups are in Bengaluru; online cohorts welcome." />
+    <meta property="og:image" content="https://www.thereaddevils.com/assets/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://ajay.example.com/read-devils/" />
+    <meta property="og:url" content="https://www.thereaddevils.com/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="The Read Devils Reading Club — Invite-Only Readers’ Circle" />
-    <meta name="twitter:description" content="Invite-only reading club in India for people who love books, films, music, and art." />
-    <meta name="twitter:image" content="./assets/og-image.png" />
+    <meta name="twitter:description" content="Bengaluru-based invite-only reading club. Most meetups are in Bengaluru; online cohorts welcome." />
+    <meta name="twitter:image" content="https://www.thereaddevils.com/assets/og-image.png" />
 
     <style>
       :root {
@@ -72,13 +72,17 @@
       .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(209,59,59,0.35); }
 
       header {
-        position: sticky;
+        position: fixed;
         top: 0;
-        backdrop-filter: saturate(1.2) blur(6px);
-        background: rgba(14,14,14,0.75);
+        left: 0;
+        right: 0;
+        -webkit-backdrop-filter: saturate(1.2) blur(4px);
+        backdrop-filter: saturate(1.2) blur(4px);
+        background: rgba(14,14,14,0.85);
         border-bottom: 1px solid rgba(255,255,255,0.08);
-        z-index: 10;
+        z-index: 1000;
       }
+      main { padding-top: var(--header-h, 76px); }
       nav { display: flex; align-items: center; gap: var(--space-5); padding: var(--space-4) 0; }
       nav .spacer { flex: 1; }
       nav a { text-decoration: none; opacity: 0.95; }
@@ -145,16 +149,12 @@
 
       /* Ensure hamburger is styled and visible by default */
       .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 0; -webkit-appearance: none; appearance: none; cursor: pointer; }
-      .nav-toggle .bar { display: block; width: 26px; height: 3px; background: #fff; border-radius: 2px; }
-      .nav-toggle .bar + .bar { margin-top: 5px; }
       @media (min-width: 1201px) { .nav-toggle { display: none; } }
       @media (max-width: 1200px) {
         nav { display: grid !important; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 0; padding: var(--space-3) 0; position: relative; overflow: visible; }
         nav .spacer { display: none; }
         nav .brand { grid-column: 2; justify-self: center; }
         .nav-toggle { display: inline-flex !important; align-items: center; justify-content: center; width: 44px; height: 44px; z-index: 30; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 0; -webkit-appearance: none; appearance: none; }
-        .nav-toggle .bar { display: block; width: 26px; height: 3px; background: #fff; border-radius: 2px; }
-        .nav-toggle .bar + .bar { margin-top: 5px; }
         .menu-items { display: block; position: absolute; top: calc(100% - 2px); left: 0; right: 0; background: rgba(14,14,14,0.98); border-bottom: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 24px rgba(0,0,0,0.35); padding: 6px 0; z-index: 20;
           visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; max-height: 0; overflow: hidden;
           transition: opacity 180ms ease, transform 220ms ease, max-height 260ms ease, visibility 0s linear 220ms; }
@@ -162,8 +162,8 @@
       }
     </style>
     <script>document.documentElement.classList.remove('no-js');</script>
-    <script type="module" crossorigin src="./assets/index-DDkzWACG.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DMpZWyCv.css">
+    <script type="module" crossorigin src="./assets/index-U9yWdJIs.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-nHNrjSp4.css">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -180,8 +180,8 @@
           <div class="spacer"></div>
           <div id="primary-menu" class="menu-items">
           <a href="#why">Why Join?</a>
-          <a href="#activities">What You’ll Do?</a>
-          <a href="#how">How It Works?</a>
+          <a href="#activities">What You’ll Do</a>
+          <a href="#how">How It Works</a>
           <a href="#faqs">FAQs</a>
             <a href="#invite" class="btn">Request Invite</a>
           </div>
@@ -199,6 +199,9 @@
               <span class="line3">Reading Club</span>
             </h1>
             <p class="subhead">Turn pages into experiences. Join a circle that actually reads.</p>
+            <p>
+              <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+            </p>
           </div>
         </div>
       </section>
@@ -217,7 +220,7 @@
 
       <section id="activities">
         <div class="container">
-          <h2>What You’ll Do?</h2>
+          <h2>What You’ll Do</h2>
           <div class="activity-grid">
             <div class="activity-item">
               <div class="activity-card" style="--bg: url('./assets/open-book-with-bookmark-800-BNeAJ4Gx.jpg')"></div>
@@ -253,12 +256,12 @@
 
       <section id="how">
         <div class="container">
-          <h2>How It Works?</h2>
+          <h2>How It Works</h2>
           <ol>
             <li>Request an invite (limited seats; we keep cohorts small).</li>
             <li>Pick a reading pledge—pages per day or week.</li>
             <li>Join check‑ins; share one insight that stayed with you.</li>
-            <li>Join city meetups when you can.</li>
+            <li>Join city meetups in Bengaluru when you can.</li>
           </ol>
         </div>
       </section>
@@ -288,7 +291,11 @@
           </details>
           <details>
             <summary>Where are you based?</summary>
-            <p>We’re based in India, with online participation worldwide. Commuters are welcome.</p>
+            <p>Bengaluru. Most of our in‑person magic happens here—coffee, museums, and book swaps. Online cohorts run in parallel.</p>
+          </details>
+          <details>
+            <summary>Can I join if I’m not in Bengaluru?</summary>
+            <p>Yes. You’ll join an online cohort for check‑ins and discussions. Visiting Bengaluru? Pull up a chair at a meetup.</p>
           </details>
         </div>
       </section>
@@ -297,6 +304,7 @@
         <div class="container">
           <h2>Request Invite</h2>
           <p>We review invite requests periodically. If selected, you’ll hear back within 1–2 weeks.</p>
+          <p>We prioritize Bengaluru readers for in‑person cohorts. Not in town? Join an online cohort—and drop by when you’re here.</p>
           <p>
             <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
           </p>
