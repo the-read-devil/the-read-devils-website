@@ -125,6 +125,9 @@ a:not(.btn):focus-visible {
 /* Prevent background scroll when mobile menu is open */
 body.menu-open { overflow: hidden; }
 
+/* Prevent background scroll when modal is open */
+body.modal-open { overflow: hidden; }
+
 /* Uniform headings: neutral text with accent underline */
 section:not(.hero) h2 {
   color: inherit;
@@ -145,3 +148,53 @@ section:not(.hero) h2::after {
 
 /* Revert accents elsewhere to defaults for a calmer, uniform look */
 
+
+/* Modal dialog */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+}
+.modal-overlay[aria-hidden="false"] { display: flex; }
+
+.modal {
+  background: #111;
+  color: #fff;
+  width: 100%;
+  max-width: 560px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  padding: var(--space-6);
+  position: relative;
+}
+.email-row { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-3); padding: 6px 8px; border: 1px solid var(--color-accent); border-radius: 10px; }
+.email-text { font-weight: 700; letter-spacing: 0.2px; flex: 1; }
+.btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; border: 0; background: transparent; color: var(--color-accent); cursor: pointer; }
+.btn-icon:hover, .btn-icon:focus-visible { background: rgba(209,59,59,0.12); }
+/* outline two-pages icon */
+.icon-copy { display: block; stroke: var(--color-accent); fill: none; stroke-width: 1.5; }
+.modal-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4); }
+.modal-note { opacity: 0.8; font-size: 14px; margin-top: var(--space-4); }
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.modal-close:hover, .modal-close:focus-visible { background: rgba(255,255,255,0.08); }

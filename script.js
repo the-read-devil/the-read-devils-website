@@ -39,9 +39,10 @@ if (navToggle && primaryMenu) {
   applyHiddenForViewport();
 
   const setMenuA11y = () => {
+    const isMobile = media.matches;
     const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-    primaryMenu.setAttribute('aria-hidden', String(!isOpen));
-    try { primaryMenu.inert = !isOpen; } catch { /* inert not supported */ }
+    primaryMenu.setAttribute('aria-hidden', String(isMobile ? !isOpen : false));
+    try { primaryMenu.inert = isMobile ? !isOpen : false; } catch { /* inert not supported */ }
   };
 
   navToggle.addEventListener('click', () => {
@@ -185,4 +186,111 @@ if (headerEl && mainEl) {
     document.fonts.ready.then(schedule2).catch(() => {});
   }
 }
+
+// Invite modal: open from any ".btn-invite" and provide copy + mailto actions
+(() => {
+  const EMAIL = 'support@thereaddevils.com';
+  const DEFAULT_MAILTO = 'mailto:support@thereaddevils.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A';
+
+  const modalOverlay = document.getElementById('invite-modal');
+  if (!modalOverlay) return;
+  const modal = modalOverlay.querySelector('.modal');
+  const closeBtn = modalOverlay.querySelector('.modal-close');
+  const copyBtn = modalOverlay.querySelector('.btn-copy-email');
+  const sendLink = modalOverlay.querySelector('.btn-send-email');
+
+  let previouslyFocused = null;
+
+  const openModal = (mailtoHref) => {
+    // Update mailto target
+    sendLink.setAttribute('href', mailtoHref || DEFAULT_MAILTO);
+    // Show modal
+    previouslyFocused = document.activeElement;
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    // Focus first interactive element
+    (copyBtn || closeBtn || modal).focus({ preventScroll: true });
+    // Trap focus inside modal (basic)
+    document.addEventListener('keydown', onKeyDown);
+  };
+
+  const closeModal = () => {
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onKeyDown);
+    if (previouslyFocused && previouslyFocused.focus) {
+      previouslyFocused.focus({ preventScroll: true });
+    }
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+    }
+    if (e.key === 'Tab') {
+      // very small focus trap
+      const focusables = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  };
+
+  // Wire openers
+  document.querySelectorAll('.btn-invite').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      // Respect reduced motion users: no animation either way, but we still open modal
+      e.preventDefault();
+      const mailto = btn.getAttribute('data-mailto') || btn.getAttribute('href') || DEFAULT_MAILTO;
+      openModal(mailto);
+    });
+  });
+
+  // Close actions
+  closeBtn && closeBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      closeModal();
+    }
+  });
+
+  // Copy email address
+  copyBtn && copyBtn.addEventListener('click', async () => {
+    const email = copyBtn.getAttribute('data-email') || EMAIL;
+    let copied = false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(email);
+        copied = true;
+      }
+    } catch { /* ignore */ }
+    if (!copied) {
+      const ta = document.createElement('textarea');
+      ta.value = email;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); copied = true; } catch { /* no-op */ }
+      document.body.removeChild(ta);
+    }
+    const originalHTML = copyBtn.innerHTML;
+    const originalAria = copyBtn.getAttribute('aria-label') || '';
+    copyBtn.innerHTML = copied ? 'Copied!' : 'Copy failed';
+    copyBtn.setAttribute('aria-label', copied ? 'Copied!' : 'Copy failed');
+    setTimeout(() => {
+      copyBtn.innerHTML = originalHTML;
+      if (originalAria) copyBtn.setAttribute('aria-label', originalAria);
+    }, 1500);
+  });
+})();
 

@@ -183,7 +183,7 @@
           <a href="#activities">What You’ll Do</a>
           <a href="#how">How It Works</a>
           <a href="#faqs">FAQs</a>
-            <a href="#invite" class="btn">Request Invite</a>
+            <a href="#invite" class="btn btn-invite" data-mailto="mailto:support@thereaddevils.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
           </div>
         </nav>
       </div>
@@ -200,7 +200,7 @@
             </h1>
             <p class="subhead">Turn pages into experiences. Join a circle that actually reads.</p>
             <p>
-              <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+              <a class="btn btn-invite" href="mailto:support@thereaddevils.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
             </p>
           </div>
         </div>
@@ -306,7 +306,7 @@
           <p>We review invite requests periodically. If selected, you’ll hear back within 1–2 weeks.</p>
           <p>We prioritize Bengaluru readers for in‑person cohorts. Not in town? Join an online cohort—and drop by when you’re here.</p>
           <p>
-            <a class="btn" href="mailto:read.devils@gmail.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
+            <a class="btn btn-invite" href="mailto:support@thereaddevils.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Request Invite</a>
           </p>
         </div>
       </section>
@@ -315,9 +315,31 @@
     <footer>
       <div class="container">
         <p>&copy; <span id="year"></span> Read Devils. All rights reserved.</p>
-        <p><a href="#invite">Request an invite</a></p>
+        
       </div>
     </footer>
+
+    <!-- Invite modal -->
+    <div class="modal-overlay" id="invite-modal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
+        <button class="modal-close" type="button" aria-label="Close dialog">&times;</button>
+        <h3 id="invite-modal-title" class="mt-0">Request Invite</h3>
+        <p>Send us an email:</p>
+        <div class="email-row" role="group" aria-label="Email address">
+          <span class="email-text" id="invite-email">support@thereaddevils.com</span>
+          <button type="button" class="btn-icon btn-copy-email" data-email="support@thereaddevils.com" aria-label="Copy email">
+            <svg class="icon-copy" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="8" y="7" width="11" height="14" rx="2"></rect>
+              <rect x="5" y="3" width="11" height="14" rx="2"></rect>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-actions">
+          <a class="btn btn-send-email" href="mailto:support@thereaddevils.com?subject=Request%20Invite%20-%20Read%20Devils&body=Name%3A%0ACity%3A%0AWhy%20I%20want%20to%20join%3A%0AFavorite%20book%20or%20film%3A%0AReferrer%20(if%20any)%3A">Send email</a>
+        </div>
+        <p class="modal-note">We review requests periodically and reply within 1–2 weeks.</p>
+      </div>
+    </div>
 
     <script type="module" src="./script.js"></script>
   </body>
