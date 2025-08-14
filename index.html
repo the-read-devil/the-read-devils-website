@@ -103,7 +103,7 @@
         pointer-events: none;
       }
       .hero .container { min-height: 72vh; display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: none; width: 100%; padding-left: 0; padding-right: 0; }
-      .title-wrap { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); background: rgba(0,0,0,0.38); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); padding: var(--space-8) var(--space-6); border-radius: 0; border: 0; box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06); }
+      .title-wrap { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); background: rgba(0,0,0,0.38); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); padding: var(--space-8) var(--space-6); border-radius: 0; border: 0; box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; }
       .logo { display: none; }
       .brand { width: 44px; height: 44px; display: block; overflow: hidden; border-radius: 6px; }
       .brand .site-logo { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 50%; transform: scale(1.28); transform-origin: center; }
@@ -120,15 +120,17 @@
       ul { padding-left: 20px; }
       .grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
       .activity-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .activity-item { display: flex; flex-direction: column; gap: var(--space-3); }
       .activity-card {
         position: relative; border-radius: var(--radius); overflow: hidden; isolation: isolate;
         background: #111; min-height: 160px; aspect-ratio: 16 / 10; border: 1px solid rgba(255,255,255,0.08);
       }
-      .activity-card::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.55)), var(--bg, url('./assets/logo-square-BbqpFer7.png')); background-size: cover; background-position: center; opacity: 0.95; z-index: -1; }
+      .activity-card::before { content: ""; position: absolute; inset: 0; background-image: var(--bg, url('./assets/logo-square-BbqpFer7.png')); background-size: cover; background-position: center; z-index: -1; }
       .activity-card { position: relative; }
-      .activity-card .text { position: absolute; left: 12px; right: 12px; bottom: 12px; }
-      .activity-card .label { display: block; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
-      .activity-card .caption { display: block; margin-top: 6px; font-size: 14px; opacity: 0.92; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+      .activity-meta { padding: 0 2px; }
+      .activity-meta .label { display: block; font-weight: 800; letter-spacing: 0.2px; }
+      .activity-meta .caption { display: block; margin-top: 4px; font-size: 14px; opacity: 0.9; }
+      
 
       details { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: var(--space-4); }
       details + details { margin-top: var(--space-4); }
@@ -160,7 +162,7 @@
       }
     </style>
     <script>document.documentElement.classList.remove('no-js');</script>
-    <script type="module" crossorigin src="./assets/index-BaglfQdA.js"></script>
+    <script type="module" crossorigin src="./assets/index-DCo72hdi.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-C7xzXwBU.css">
   </head>
   <body>
@@ -217,26 +219,30 @@
         <div class="container">
           <h2>What You’ll Do?</h2>
           <div class="activity-grid">
-            <div class="activity-card" style="--bg: url('./assets/logo-square-BbqpFer7.png')">
-              <div class="text">
+            <div class="activity-item">
+              <div class="activity-card" style="--bg: url('./assets/open-book-with-bookmark-800-BNeAJ4Gx.jpg')"></div>
+              <div class="activity-meta">
                 <span class="label">20‑Page Sprints</span>
                 <p class="caption">Pick a pledge and track your progress.</p>
               </div>
             </div>
-            <div class="activity-card" style="--bg: url('./assets/logo-square-BbqpFer7.png')">
-              <div class="text">
+            <div class="activity-item">
+              <div class="activity-card" style="--bg: url('./assets/page-with-highlighted-text-800-BZKu57r3.jpg')"></div>
+              <div class="activity-meta">
                 <span class="label">Check‑ins</span>
                 <p class="caption">Share quick updates and one insight that stayed with you.</p>
               </div>
             </div>
-            <div class="activity-card" style="--bg: url('./assets/logo-square-BbqpFer7.png')">
-              <div class="text">
+            <div class="activity-item">
+              <div class="activity-card" style="--bg: url('./assets/open-book-in-shadow-800-DxARsTmm.jpg')"></div>
+              <div class="activity-meta">
                 <span class="label">Mind‑Blowing Moments</span>
                 <p class="caption">Post the line or scene that resonates.</p>
               </div>
             </div>
-            <div class="activity-card" style="--bg: url('./assets/logo-square-BbqpFer7.png')">
-              <div class="text">
+            <div class="activity-item">
+              <div class="activity-card" style="--bg: url('./assets/multiple-books-and-people-800-DLOjeIn9.jpg')"></div>
+              <div class="activity-meta">
                 <span class="label">Meetups & Swaps</span>
                 <p class="caption">Coffee, museum, and film nights.</p>
               </div>
