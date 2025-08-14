@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://ajay.example.com/read-devils/sitemap.xml
+Sitemap: https://www.thereaddevils.com/sitemap.xml
 

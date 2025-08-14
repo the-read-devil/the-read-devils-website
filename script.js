@@ -35,17 +35,38 @@ if (navToggle && primaryMenu) {
   // Initialize state
   navToggle.setAttribute('aria-expanded', 'false');
   navToggle.setAttribute('aria-label', 'Open menu');
+  primaryMenu.setAttribute('aria-hidden', 'true');
   applyHiddenForViewport();
+
+  const setMenuA11y = () => {
+    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+    primaryMenu.setAttribute('aria-hidden', String(!isOpen));
+    try { primaryMenu.inert = !isOpen; } catch { /* inert not supported */ }
+  };
 
   navToggle.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
     navToggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
     applyHiddenForViewport();
+    setMenuA11y();
   });
 
   media.addEventListener('change', applyHiddenForViewport);
   document.addEventListener('keydown', closeOnEscape);
+
+  // Close menu when clicking outside the nav on mobile
+  const navEl = document.querySelector('nav[aria-label="Primary"]');
+  document.addEventListener('click', (event) => {
+    if (!media.matches) return; // only on mobile/tablet widths
+    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+    if (!isOpen) return;
+    if (navEl && !navEl.contains(event.target)) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+      applyHiddenForViewport();
+    }
+  });
 
   // Close menu when a link is clicked
   primaryMenu.querySelectorAll('a').forEach((link) => {
@@ -53,20 +74,34 @@ if (navToggle && primaryMenu) {
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', 'Open menu');
       applyHiddenForViewport();
+      setMenuA11y();
     });
   });
+
+  // Initialize a11y state once
+  setMenuA11y();
 }
 
-// Hide/show floating CTA based on hero visibility
-const fab = document.querySelector('.cta-fab');
+// Ensure only one CTA is visible: hide header CTA while hero or invite CTA is in view
 const hero = document.querySelector('.hero');
-if (window.IntersectionObserver && fab && hero) {
+const invite = document.querySelector('#invite');
+const navCta = document.querySelector('nav .menu-items .btn');
+if (window.IntersectionObserver && navCta && (hero || invite)) {
+  let heroInView = false;
+  let inviteInView = false;
+  const applyCtaVisibility = () => {
+    const contentCtaVisible = heroInView || inviteInView;
+    navCta.style.display = contentCtaVisible ? 'none' : '';
+  };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      fab.style.display = entry.isIntersecting ? 'none' : 'block';
+      if (entry.target === hero) heroInView = entry.isIntersecting;
+      if (entry.target === invite) inviteInView = entry.isIntersecting;
     });
+    applyCtaVisibility();
   }, { threshold: 0.2 });
-  observer.observe(hero);
+  if (hero) observer.observe(hero);
+  if (invite) observer.observe(invite);
 }
 
 // Respect reduced motion for anchor scrolling
@@ -94,9 +129,11 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
-// Keep title-wrap height equal to hero height
+// Keep title-wrap height equal to hero height and sync main padding to header
 const heroSection = document.querySelector('.hero');
 const titleWrap = document.querySelector('.hero .title-wrap');
+const headerEl = document.querySelector('header');
+const mainEl = document.querySelector('main');
 if (heroSection && titleWrap) {
   let rafId = 0;
   const setTitleWrapHeight = () => {
@@ -121,6 +158,31 @@ if (heroSection && titleWrap) {
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(schedule).catch(() => {});
+  }
+}
+
+// Sync --header-h CSS var and main padding to actual header height
+if (headerEl && mainEl) {
+  let rafId2 = 0;
+  const syncHeaderSize = () => {
+    const h = Math.round(headerEl.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    mainEl.style.paddingTop = `${h}px`;
+  };
+  const schedule2 = () => {
+    if (rafId2) cancelAnimationFrame(rafId2);
+    rafId2 = requestAnimationFrame(syncHeaderSize);
+  };
+  schedule2();
+  window.addEventListener('load', schedule2, { passive: true });
+  window.addEventListener('resize', schedule2, { passive: true });
+  window.addEventListener('orientationchange', schedule2, { passive: true });
+  if (window.ResizeObserver) {
+    const ro2 = new ResizeObserver(schedule2);
+    ro2.observe(headerEl);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(schedule2).catch(() => {});
   }
 }
 

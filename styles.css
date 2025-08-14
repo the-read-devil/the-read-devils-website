@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'Rainbow';
-  src: url('./assets/fonts/Rainbow-Regular.woff2') format('woff2'),
-       url('./assets/fonts/Rainbow-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/Rainbow-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -74,10 +73,12 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* Guard grid against overflow on tight widths */
 .activity-grid { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
 
+/* Offset anchor scroll to account for fixed header height */
+section { scroll-margin-top: var(--header-h, 80px); }
+
 /* Hamburger and responsive nav */
 .nav-toggle { display: none; appearance: none; background: transparent; border: 0; padding: 10px; margin: -6px 0; cursor: pointer; border-radius: 6px; }
 .nav-toggle:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(209,59,59,0.35); }
-.nav-toggle .bar { display: none; }
 .nav-toggle .icon-burger { display: block; color: #fff; }
 
 /* Default desktop menu layout */
@@ -99,13 +100,22 @@ nav .menu-items { display: flex; align-items: center; gap: var(--space-5); }
 
   .nav-toggle[aria-expanded="true"] ~ .menu-items { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 80vh; transition-delay: 0s; }
 
-  /* Animate icon to X when open */
-  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] .bar:nth-of-type(3) { transform: translateY(-7px) rotate(-45deg); }
-
   /* If JS is disabled (html.no-js remains), keep menu visible */
   .no-js nav .menu-items { display: block; position: static; box-shadow: none; border: 0; padding: 0; visibility: visible; opacity: 1; transform: none; pointer-events: auto; max-height: none; }
+}
+
+/* Reduce header blur slightly and respect reduced motion */
+header { -webkit-backdrop-filter: saturate(1.2) blur(4px); backdrop-filter: saturate(1.2) blur(4px); }
+@media (prefers-reduced-motion: reduce) {
+  header { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(14,14,14,0.95); }
+}
+
+/* Improve visible focus for text links on dark background */
+a:not(.btn):focus-visible {
+  outline: none;
+  text-decoration: underline;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
 }
 
 /* Prevent background scroll when mobile menu is open */
