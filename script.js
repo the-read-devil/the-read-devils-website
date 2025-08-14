@@ -94,3 +94,33 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
+// Keep title-wrap height equal to hero height
+const heroSection = document.querySelector('.hero');
+const titleWrap = document.querySelector('.hero .title-wrap');
+if (heroSection && titleWrap) {
+  let rafId = 0;
+  const setTitleWrapHeight = () => {
+    const height = Math.round(heroSection.getBoundingClientRect().height);
+    titleWrap.style.minHeight = `${height}px`;
+  };
+  const schedule = () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(setTitleWrapHeight);
+  };
+
+  // Initial sync after layout and when fonts/images finish loading
+  schedule();
+  window.addEventListener('load', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(schedule);
+    ro.observe(heroSection);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(schedule).catch(() => {});
+  }
+}
+
